@@ -1,0 +1,43 @@
+[is=login] {
+	&:not([brick-initialized="yes"]){display: none;}
+	width: calc(260px);
+	background-color: rgba(255,255,255,.1);
+	border:1px solid rgba(255,255,255,.1);
+	box-shadow: 0 5px 15px rgba(0,0,0,.3);
+	div{
+		padding: 15px;
+	}
+	img{
+		opacity: .35;
+	}
+	h1{
+		margin:0;
+		font-size:13px;
+		margin-bottom: 4px;
+	}
+	input{
+		width: 100%;
+		margin-bottom: 4px;
+		font-family: Rajdhani;
+		padding:4px 10px;
+		box-shadow: 0 5px 5px rgba(0,0,0,.1);
+		border:0;
+	}
+	button{
+		border:0;
+		background-color: transparent;
+		width: 100%;
+		text-align: center;
+		color:white;
+		font-size:12px;
+	}
+	div.error{
+		text-align: center;
+		background-color: #002d53;
+		font-weight: 100;
+		display: none;
+		&.active{
+			display: block;
+		}
+	}
+}

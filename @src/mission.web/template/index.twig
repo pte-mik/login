@@ -1,0 +1,14 @@
+{% extends('@smartpage/smartpage.twig') %}
+{% block content %}
+	<main>
+		{% if app %}
+			<div is="login" data-app="{{ app.name }}" data-title="{{ app.title }}">{{ params|json_encode|raw }}</div>
+		{% else %}
+			error
+		{% endif %}
+	</main>
+{% endblock %}
+{% block head %}
+	{{ parent() }}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}

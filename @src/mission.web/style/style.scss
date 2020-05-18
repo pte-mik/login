@@ -1,0 +1,23 @@
+$font-path: "/~fonts/";
+$fontawesome-path: "/~fonts/fontawesome";
+@import "./src/google-fonts";
+@import "./src/fontawesome-pro";
+
+*{
+	font-family: Oswald,sans-serif;
+	box-sizing: border-box;
+}
+html,body{
+	height: 100%;
+}
+body{
+	background: linear-gradient(40deg, rgba(0,45,83,1) 0%, rgba(42,112,167,1) 100%);
+	color:white;
+}
+main{
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}

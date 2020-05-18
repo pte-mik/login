@@ -1,0 +1,10 @@
+<div>
+	<img src="/~web/img/mik-logo.svg">
+	<h1>{{ title }} Login</h1>
+	<form (form)>
+		<input type="text" (input-login) placeholder="EHA/NEPTUN">
+		<input type="password" (input-password) placeholder="PASSWORD">
+		<button type="submit">Login</button>
+	</form>
+</div>
+<div class="error" (error)> Hibás felhasználónév vagy jelszó!</div>
