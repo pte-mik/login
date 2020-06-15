@@ -19,7 +19,6 @@ class Auth extends ApiJsonResponder{
 	 * @action  login
 	 */
 	public function login_get(){
-		dump('GET');
 		return $this->login(
 			$this->getQueryBag()->get('app'),
 			$this->getQueryBag()->get('login'),
@@ -32,7 +31,6 @@ class Auth extends ApiJsonResponder{
 	 * @action  login
 	 */
 	public function login_post(){
-		dump('POST');
 		return $this->login(
 			$this->getJsonParamBag()->get('app'),
 			$this->getJsonParamBag()->get('login'),
@@ -41,10 +39,19 @@ class Auth extends ApiJsonResponder{
 		);
 	}
 
+	/**
+	 * @accepts post
+	 * @action  auth
+	 */
+	public function auth(){
+		$login = $this->getJsonParamBag()->get('login');
+		$password = $this->getJsonParamBag()->get('password');
+		$data = AuthGateway::Service()->login($login, $password);
+		if ($data['status'] === 'success') return $data['user'];
+		else $this->break(NotAuthorized::class);
+	}
+
 	private function login($app, $login, $password, $token = false){
-		dump($app);
-		dump($login);
-		dump($password);
 		$app = App::search(Filter::where(App::f_name()->is($app)))->pick();
 
 		if ($app){
@@ -71,14 +78,13 @@ class Auth extends ApiJsonResponder{
 			if ($user && $user->checkRole(Role::Active)){
 				if ($token){
 					$token = JWT::Service()->create(['userid' => $user->id, 'appid' => $app->id])->__toString();
-					return [
-						'url' => str_replace('{{token}}', $token, $app->return),
-					];
+					return ['url' => str_replace('{{token}}', $token, $app->return)];
 				}else{
 					return $user->publish();
 				}
 			}
 		}
+
 		$this->break(NotAuthorized::class);
 
 	}

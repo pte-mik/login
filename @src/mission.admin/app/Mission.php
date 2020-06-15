@@ -4,8 +4,12 @@ namespace Application\AdminCodex;
 
 use Andesite\Codex\CodexMission;
 use Andesite\Codex\Form\CodexMenu;
+use Andesite\Codex\Interfaces\CodexWhoAmIInterface;
+use Andesite\Core\ServiceManager\ServiceContainer;
 use Andesite\Mission\Web\Routing\ApiManager;
 use Andesite\Mission\Web\Routing\Router;
+use Andesite\Zuul\Interfaces\AuthServiceInterface;
+use Application\Service\Auth\CodexWhoAmI;
 
 class Mission extends CodexMission{
 
@@ -19,5 +23,10 @@ class Mission extends CodexMission{
 		parent::route($router);
 		ApiManager::setup($router, '/api', __NAMESPACE__.'\\Api');
 	}
-
+	public function setup($config){
+		parent::setup($config);
+		$this->title = "MIK Login Admin";
+//		ServiceContainer::shared(AuthServiceInterface::class, AuthService::class);
+		ServiceContainer::shared(CodexWhoAmIInterface::class, CodexWhoAmI::class);
+	}
 }
