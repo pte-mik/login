@@ -1,4 +1,4 @@
-pattern~: ("www." + sys.domain)
+pattern~: sys.domain
 mission: \Application\Mission\Web\Mission
 modules:
   auth:
